@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import "./FileVersions.css";
+import "../resources/css/FileVersions.css";
 
 function FileVersionsList(props) {
   const file_versions = props.file_versions;
@@ -34,7 +34,7 @@ function FileVersions() {
     <div>
       <h1>Found {data.length} File Versions</h1>
       <div>
-        <FileVersionsList file_versions={data} />h
+        <FileVersionsList file_versions={data} />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import './App.css';
+import '../resources/css/App.css';
 import FileVersions from './FileVersions'
 
 

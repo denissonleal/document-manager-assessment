@@ -1,0 +1,16 @@
+# TODO
+
+- salvar documento
+- acessar documento
+- versionar documentos
+- autenticacao de usuario
+- proteger acesso do documento apenas pelo proprio usuario
+- gerenciar versoes dos documentos
+- implementar testes
+- add routes in a const file
+
+# DOING
+
+# DONE
+
+- add docker
