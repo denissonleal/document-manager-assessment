@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 
 function FileUpload(props) {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [successSubmition, setSuccessSubmition] = useState(false);
+  const [failSubmition, setFailSubmition] = useState(false);
+  const [submiting, setSubmiting] = useState(false);
   const filename = props.filename;
 
   const handleFileChange = (event) => {
@@ -11,6 +14,9 @@ function FileUpload(props) {
   const saveFile = async () =>{
     let formData = new FormData();
 
+    setSuccessSubmition(false);
+    setFailSubmition(false);
+    setSubmiting(true);
     formData.append("file_name", filename);
     formData.append("file", selectedFile);
 
@@ -18,18 +24,17 @@ function FileUpload(props) {
       const response = await fetch('http://localhost:8001/api/file_versions/', {
         method: 'POST',
         body: formData,
-        headers: {
-          // 'Content-Type': 'multipart/form-data',
-        },
       });
 
+      setSubmiting(false);
       if (response.ok) {
-        console.log('Upload successful!');
+        setSuccessSubmition(true);
+        window.location.reload();
       } else {
-        console.error('Upload failed');
+        setFailSubmition(true);
       }
     } catch (error) {
-      console.error('Error uploading file:', error);
+      setFailSubmition(true);
     }
   }
 
@@ -50,12 +55,22 @@ function FileUpload(props) {
               type="button"
               onClick={saveFile}
               className="btn btn-primary float-left mt-2"
+              disabled={submiting}
             >
-              Send new document
+              {submiting ? 'Sending...' : 'Send new document'}
             </button>
 
-              {/* {status ? <h2>{status}</h2>:null} */}
+            {successSubmition && (
+              <div className="alert alert-success" role="alert">
+                Successfully submitted file!
+              </div>
+            )}
 
+            {failSubmition && (
+              <div className="alert alert-danger" role="alert">
+                Error message!
+              </div>
+            )}
           </form>
         </div>
       </div>

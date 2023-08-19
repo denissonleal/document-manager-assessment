@@ -5,6 +5,8 @@
 - gerenciar versoes dos documentos
 - implementar testes
 - add routes in a const file
+- use o createContext para gerenciar a lista de arquivos
+- reset form depois de enviar
 
 # DOING
 

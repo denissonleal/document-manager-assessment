@@ -1,24 +1,18 @@
-import os
-from django.conf import settings
-from django.shortcuts import render
 from django.db.models import Max
-
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.mixins import RetrieveModelMixin, ListModelMixin, CreateModelMixin
 from rest_framework.viewsets import GenericViewSet
-from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
-
+from rest_framework.parsers import MultiPartParser
 from file_versions.models import FileVersion
 from .serializers import FileVersionSerializer
-from rest_framework.parsers import FileUploadParser
+
 
 class FileVersionViewSet(CreateModelMixin, RetrieveModelMixin, ListModelMixin, GenericViewSet):
     authentication_classes = []
     permission_classes = []
     serializer_class = FileVersionSerializer
     queryset = FileVersion.objects.all()
-    lookup_field = "id"
     parser_classes = (MultiPartParser,)
 
     def get_queryset(self):
@@ -26,12 +20,11 @@ class FileVersionViewSet(CreateModelMixin, RetrieveModelMixin, ListModelMixin, G
 
         filename = self.request.query_params.get('file_name')
         queryset = queryset.filter(file_name=filename)
+        queryset = queryset.order_by('-id')
 
         return queryset
 
     def create(self, request):
-        # file_serializer = FileVersionSerializer(data=request.data)
-        # file_serializer = FileUploadParser(request.data)
         serializer = self.serializer_class(data = request.data)
 
         if not serializer.is_valid():
