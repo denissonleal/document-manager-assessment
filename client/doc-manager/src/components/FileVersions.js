@@ -1,40 +1,39 @@
 import React, { useState, useEffect } from "react";
+import FileUpload from './FileUpload'
+import FileVersionsList from './FileVersionsList'
 
 import "../resources/css/FileVersions.css";
 
-function FileVersionsList(props) {
-  const file_versions = props.file_versions;
-  return file_versions.map((file_version) => (
-    <div className="file-version" key={file_version.id}>
-      <h2>File Name: {file_version.file_name}</h2>
-      <p>
-        ID: {file_version.id} Version: {file_version.version_number}
-      </p>
-    </div>
-  ));
-}
 function FileVersions() {
   const [data, setData] = useState([]);
-  console.log(data);
+  const filename = window.location.href.replace(/^http(s)?:\/\/[a-zA-Z0-9\.:]+\//, '');
 
   useEffect(() => {
     // fetch data
     const dataFetch = async () => {
-      const data = await (
-        await fetch("http://localhost:8001/api/file_versions")
+
+      const responseData = await (
+        await fetch(`http://localhost:8001/api/file_versions?file_name=${filename}`)
       ).json();
 
       // set state when the data received
-      setData(data);
+      setData(responseData);
     };
 
     dataFetch();
   }, []);
+
   return (
-    <div>
-      <h1>Found {data.length} File Versions</h1>
-      <div>
-        <FileVersionsList file_versions={data} />
+    <div className="container">
+      <div className="row justify-content-md-center">
+        <h1>File Management: {filename}</h1>
+
+        <FileUpload filename={filename}/>
+
+        <h2>Found {data.length} File Versions</h2>
+        <div>
+          <FileVersionsList file_versions={data} />
+        </div>
       </div>
     </div>
   );

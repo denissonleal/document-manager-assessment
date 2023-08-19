@@ -9,6 +9,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 # API URLS
 urlpatterns = [
+    path('admin/', admin.site.urls),
     # API base url
     path("api/", include("config.api_router")),
     # DRF auth token

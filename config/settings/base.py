@@ -8,6 +8,8 @@ import environ
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # propylon_document_manager/
 APPS_DIR = BASE_DIR / "propylon_document_manager"
+STORAGE_DIR = BASE_DIR / "storage"
+FILES_STORAGE_DIR = STORAGE_DIR / "files"
 env = environ.Env()
 
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
