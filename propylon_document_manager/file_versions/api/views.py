@@ -1,14 +1,17 @@
 from django.db.models import Max
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.mixins import RetrieveModelMixin, ListModelMixin, CreateModelMixin
+from rest_framework.mixins import ListModelMixin, CreateModelMixin
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.parsers import MultiPartParser
 from file_versions.models import FileVersion
 from .serializers import FileVersionSerializer
+from rest_framework.generics import RetrieveAPIView
+from django.http import FileResponse
+import mimetypes
+from django.http import HttpResponse
 
-
-class FileVersionViewSet(CreateModelMixin, RetrieveModelMixin, ListModelMixin, GenericViewSet):
+class FileVersionViewSet(RetrieveAPIView, CreateModelMixin, ListModelMixin, GenericViewSet):
     authentication_classes = []
     permission_classes = []
     serializer_class = FileVersionSerializer
@@ -19,7 +22,8 @@ class FileVersionViewSet(CreateModelMixin, RetrieveModelMixin, ListModelMixin, G
         queryset = super().get_queryset()
 
         filename = self.request.query_params.get('file_name')
-        queryset = queryset.filter(file_name=filename)
+        if self.action != "retrieve":
+            queryset = queryset.filter(file_name=filename)
         queryset = queryset.order_by('-id')
 
         return queryset
@@ -51,3 +55,15 @@ class FileVersionViewSet(CreateModelMixin, RetrieveModelMixin, ListModelMixin, G
         )
 
         return Response(serializer.data)
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        file_path = instance.file.path
+        mime_type, _ = mimetypes.guess_type(file_path)
+
+        with open(file_path, 'rb') as file:
+            file_content = file.read()
+        response = HttpResponse(file_content, content_type=mime_type)
+        response['Content-Disposition'] = f'attachment; filename="{instance.file_name}"'
+
+        return response
