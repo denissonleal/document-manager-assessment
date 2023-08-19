@@ -57,16 +57,4 @@ class FileVersionViewSet(CreateModelMixin, RetrieveModelMixin, ListModelMixin, G
             file_name=file_name,
         )
 
-        new_path = os.path.join(
-            settings.FILES_STORAGE_DIR,
-            str(serializer.data.get('id'))
-        )
-        try:
-            with open(new_path, 'wb') as target_file:
-                for chunk in file.chunks():
-                    target_file.write(chunk)
-        except Exception as e:
-            file_version.delete()
-            return Response('Error saving file', status=status.HTTP_400_BAD_REQUEST)
-
         return Response(serializer.data)

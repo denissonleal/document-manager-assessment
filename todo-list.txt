@@ -1,7 +1,5 @@
 # TODO
 
-- versionar documentos
-- acessar documento
 - autenticacao de usuario
 - proteger acesso do documento apenas pelo proprio usuario
 - gerenciar versoes dos documentos
@@ -10,9 +8,11 @@
 
 # DOING
 
-- salvar documento
+- acessar documento
 
 # DONE
 
+- versionar documentos
+- salvar documento
 - add docker
 - add bootstrap pelo npm
