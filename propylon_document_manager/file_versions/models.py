@@ -12,3 +12,4 @@ class FileVersion(models.Model):
     file_name = models.fields.CharField(max_length=512)
     version_number = models.fields.IntegerField()
     file = models.FileField(upload_to=generate_bin_path)
+    created_at = models.DateTimeField(auto_now_add=True)
