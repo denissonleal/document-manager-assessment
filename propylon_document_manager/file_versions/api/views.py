@@ -70,6 +70,7 @@ class FileVersionViewSet(RetrieveAPIView, CreateModelMixin, ListModelMixin, Gene
         file_version = serializer.save(
             version_number=version_number+1,
             file_name=file_name,
+            user=self.request.user,
         )
 
         return Response(serializer.data)

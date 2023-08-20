@@ -63,6 +63,7 @@ function TopBar() {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <span className="navbar-brand">Hi, {username}!</span>
+        <a href="/">Home</a>
         <button className="btn btn-outline-primary" onClick={onLogout}>Logout</button>
       </div>
     </nav>

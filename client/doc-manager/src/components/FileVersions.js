@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import CreateFile from './CreateFile'
 import FileUpload from './FileUpload'
 import FileVersionsList from './FileVersionsList'
 import TopBar from './TopBar'
@@ -46,7 +47,8 @@ function FileVersions() {
           <div className="row justify-content-md-center">
             <h1>File Management: {filename}</h1>
 
-            <FileUpload filename={filename}/>
+            {filename && <FileUpload filename={filename}/>}
+            {!filename && <CreateFile/>}
 
             <h2>Found {data.length} File Versions</h2>
             <div>

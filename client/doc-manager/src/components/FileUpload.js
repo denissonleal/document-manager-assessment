@@ -13,6 +13,7 @@ function FileUpload(props) {
 
   const saveFile = async () => {
     let formData = new FormData();
+    const token = sessionStorage.getItem('authToken');
 
     setSuccessSubmition(false);
     setFailSubmition(false);
@@ -24,6 +25,9 @@ function FileUpload(props) {
       const response = await fetch('http://localhost:8001/api/file_versions/', {
         method: 'POST',
         body: formData,
+        headers: {
+          'Authorization': `Token ${token}`
+        },
       });
 
       setSubmiting(false);

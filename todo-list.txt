@@ -13,10 +13,10 @@
 
 # DOING
 
-- homepage: quando coloca o nome vai para a pag do arquivo
 
 # DONE
 
+- homepage: quando coloca o nome vai para a pag do arquivo
 - logout
 - proteger acesso do documento apenas pelo proprio usuario
 - autenticacao de usuario
