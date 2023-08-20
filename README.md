@@ -4,13 +4,26 @@ The Propylon Document Management Technical Assessment is a simple (and incomplet
 
 ## Install with docker
 
-You will need to have docker and docker-compose installed. Then just run:
+You will need to have docker and docker-compose installed. First create the files in environment.
+
+```bash
+cp example.env .envrc
+cp client/doc-manager/example.env client/doc-manager/.env
+```
+
+Then just run:
 
 ```bash
 docker-compose up -d
 ```
 
-## Install Manually
+Two containers will run. The frontend on port 3000 and the backend on port 8001. You can access it by the address below:
+
+- Frontend: http://localhost:3000/
+- Backend API: http://localhost:8001/
+
+## or Install manually
+
 1. [Install Direnv](https://direnv.net/docs/installation.html)
 2. [Install Pipenv](https://pipenv.pypa.io/en/latest/installation/)
 3. This project requires Python 3.11 so you will need to ensure that this version of Python is installed on your OS before building the virtual environment.
