@@ -7,6 +7,8 @@ from propylon_document_manager.users.forms import UserAdminChangeForm, UserAdmin
 
 User = get_user_model()
 
+# Register your models here.
+
 
 @admin.register(User)
 class UserAdmin(auth_admin.UserAdmin):

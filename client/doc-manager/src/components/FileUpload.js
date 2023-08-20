@@ -11,7 +11,7 @@ function FileUpload(props) {
     setSelectedFile(event.target.files[0]);
   };
 
-  const saveFile = async () =>{
+  const saveFile = async () => {
     let formData = new FormData();
 
     setSuccessSubmition(false);

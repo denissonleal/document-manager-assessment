@@ -11,17 +11,21 @@ import mimetypes
 from django.http import HttpResponse
 from django.db.models import OuterRef, Subquery
 from django.db.models.functions import Coalesce
-
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 class FileVersionViewSet(RetrieveAPIView, CreateModelMixin, ListModelMixin, GenericViewSet):
-    authentication_classes = []
-    permission_classes = []
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     serializer_class = FileVersionSerializer
     queryset = FileVersion.objects.all()
     parser_classes = (MultiPartParser,)
 
     def get_queryset(self):
         queryset = super().get_queryset()
+
+        # filter user requests
+        queryset = queryset.filter(user=self.request.user)
 
         filename = self.request.query_params.get('file_name')
         if self.action != "retrieve" and filename:

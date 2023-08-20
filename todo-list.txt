@@ -1,6 +1,5 @@
 # TODO
 
-- proteger acesso do documento apenas pelo proprio usuario
 - implementar testes
     - django
     - react
@@ -15,10 +14,11 @@
 
 # DOING
 
-- autenticacao de usuario
 
 # DONE
 
+- proteger acesso do documento apenas pelo proprio usuario
+- autenticacao de usuario
 - homepage: clica e vai para a pagina do arquivo
 - homepage: list de arquivos
 - add create at date and time
