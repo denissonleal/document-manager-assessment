@@ -11,7 +11,7 @@ function FileVersionsList(props) {
     fetch(`http://localhost:8001/api/file_versions/${document_id}`, {
       method: 'GET',
       headers: {
-        'Authorization': `Token ${token}`, // Se necessário
+        'Authorization': `Token ${token}`,
       },
     })
     .then(response => {
@@ -38,7 +38,7 @@ function FileVersionsList(props) {
   };
 
   return file_versions.map((file_version) => (
-    <div className="file-version">
+    <div className="file-version" key={file_version.id}>
       <h5>
         File Name: <a
           href={"/" + file_version.file_name}

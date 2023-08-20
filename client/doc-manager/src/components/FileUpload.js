@@ -39,7 +39,7 @@ function FileUpload(props) {
   }
 
   return (
-    <div className="container">
+    <div className="container pb-4 pt-1">
       <div className="row">
         <div className="col-md-12">
           <form>

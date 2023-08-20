@@ -3,7 +3,6 @@
 - implementar testes
     - django
     - react
-- homepage: quando coloca o nome vai para a pag do arquivo
 
 # EXTRA
 
@@ -14,9 +13,11 @@
 
 # DOING
 
+- homepage: quando coloca o nome vai para a pag do arquivo
 
 # DONE
 
+- logout
 - proteger acesso do documento apenas pelo proprio usuario
 - autenticacao de usuario
 - homepage: clica e vai para a pagina do arquivo

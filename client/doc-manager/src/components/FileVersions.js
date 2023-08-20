@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FileUpload from './FileUpload'
 import FileVersionsList from './FileVersionsList'
-
+import TopBar from './TopBar'
 import "../resources/css/FileVersions.css";
 
 function FileVersions() {
@@ -11,15 +11,6 @@ function FileVersions() {
   useEffect(() => {
     const dataFetch = async () => {
       const token = sessionStorage.getItem('authToken');
-      // const authData = await (
-      //   await fetch('http://localhost:8001/auth-token/', {
-      //     method: 'GET',
-      //     headers: {
-      //       'Authorization': `Token ${token}`
-      //     }
-      //   })
-      // ).json();
-      // console.log(authData);
 
       const response = await fetch(
         `http://localhost:8001/api/file_versions?file_name=${filename}`,
@@ -48,6 +39,8 @@ function FileVersions() {
 
   return (
     <div>
+      <TopBar/>
+
       <div className="App-body">
         <div className="container">
           <div className="row justify-content-md-center">
