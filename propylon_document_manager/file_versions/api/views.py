@@ -1,4 +1,4 @@
-from django.db.models import Max
+from django.db.models import Max, F
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
@@ -10,6 +10,9 @@ from rest_framework.generics import RetrieveAPIView
 from django.http import FileResponse
 import mimetypes
 from django.http import HttpResponse
+from django.db.models import OuterRef, Subquery
+from django.db.models.functions import Coalesce
+
 
 class FileVersionViewSet(RetrieveAPIView, CreateModelMixin, ListModelMixin, GenericViewSet):
     authentication_classes = []
@@ -22,9 +25,21 @@ class FileVersionViewSet(RetrieveAPIView, CreateModelMixin, ListModelMixin, Gene
         queryset = super().get_queryset()
 
         filename = self.request.query_params.get('file_name')
-        if self.action != "retrieve":
+        if self.action != "retrieve" and filename:
             queryset = queryset.filter(file_name=filename)
-        queryset = queryset.order_by('-id')
+
+        if self.action != "retrieve" and not filename:
+            subquery = FileVersion.objects.filter(
+                file_name=OuterRef('file_name')
+            ).order_by('-version_number').values('version_number')[:1]
+
+            queryset = queryset.annotate(
+                bigger_version=Coalesce(Subquery(subquery), 0)
+            ).filter(version_number=F('bigger_version'))
+
+            queryset = queryset.order_by('file_name')
+        else:
+            queryset = queryset.order_by('-id')
 
         return queryset
 
