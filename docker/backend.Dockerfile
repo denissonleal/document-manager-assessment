@@ -7,5 +7,3 @@ RUN pip install -r /tmp/local.txt
 RUN mkdir /app
 WORKDIR /app
 ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8001"]
-# ENTRYPOINT ["tail", "-f", "/dev/null"]
-# EXPOSE 8001
