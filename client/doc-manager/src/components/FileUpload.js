@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ApiUrl from '../constants/ApiUrl';
 
 function FileUpload(props) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -22,7 +23,7 @@ function FileUpload(props) {
     formData.append("file", selectedFile);
 
     try {
-      const response = await fetch('http://localhost:8001/api/file_versions/', {
+      const response = await fetch(process.env.REACT_APP_API_URL + ApiUrl.FILE_VERSIONS, {
         method: 'POST',
         body: formData,
         headers: {

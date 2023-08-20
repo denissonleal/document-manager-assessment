@@ -61,7 +61,8 @@ class FileVersionViewSet(RetrieveAPIView, CreateModelMixin, ListModelMixin, Gene
             return Response('Please select a valid file', status=status.HTTP_400_BAD_REQUEST)
 
         version_number = FileVersion.objects.filter(
-            file_name=file_name
+            file_name=file_name,
+            user=self.request.user,
         ).aggregate(Max('version_number'))['version_number__max']
 
         if version_number is None:

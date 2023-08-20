@@ -1,4 +1,5 @@
 import moment from 'moment';
+import ApiUrl from '../constants/ApiUrl';
 
 function FileVersionsList(props) {
   const file_versions = props.file_versions;
@@ -8,7 +9,7 @@ function FileVersionsList(props) {
     const filename = event.target.getAttribute('data-filename');
     const token = sessionStorage.getItem('authToken');
 
-    fetch(`http://localhost:8001/api/file_versions/${document_id}`, {
+    fetch(process.env.REACT_APP_API_URL + ApiUrl.FILE_VERSIONS + document_id, {
       method: 'GET',
       headers: {
         'Authorization': `Token ${token}`,
@@ -50,7 +51,6 @@ function FileVersionsList(props) {
         <div className="col-2">ID: {file_version.id}</div>
         <div className="col-2">Version: {file_version.version_number}</div>
         <div className="col-5">Created: {moment(file_version.created_at).fromNow()}</div>
-        {/* <div className="col-2"><a href={"http://localhost:8001/api/file_versions/" + file_version.id} target="_blank">Download</a></div> */}
         <div className="col-3">
             <button
               type="button"

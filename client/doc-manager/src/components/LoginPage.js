@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ApiUrl from '../constants/ApiUrl';
 
 function LoginPage() {
   const [username, setUsername] = useState('');
@@ -9,7 +10,7 @@ function LoginPage() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8001/auth-token/', {
+      const response = await fetch(process.env.REACT_APP_API_URL + ApiUrl.AUTH_TOKEN, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

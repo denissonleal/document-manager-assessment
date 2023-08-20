@@ -1,6 +1,5 @@
 # TODO
 
-- add routes in a const file
 - implementar testes
     - django
     - react
@@ -10,6 +9,7 @@
 
 # DONE
 
+- add routes in a const file
 - homepage: quando coloca o nome vai para a pag do arquivo
 - logout
 - proteger acesso do documento apenas pelo proprio usuario

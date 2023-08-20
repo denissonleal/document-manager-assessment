@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ApiUrl from '../constants/ApiUrl';
 
 function TopBar() {
   const [username, setUsername] = useState([]);
@@ -7,7 +8,7 @@ function TopBar() {
     const token = sessionStorage.getItem('authToken');
 
     try {
-      const response = await fetch('http://localhost:8001/api-auth/logout/', {
+      const response = await fetch(process.env.REACT_APP_API_URL + ApiUrl.LOGOUT, {
         method: 'GET',
         headers: {
           'Authorization': `Token ${token}`,
@@ -34,7 +35,7 @@ function TopBar() {
         return;
       }
 
-      const response = await fetch('http://localhost:8001/api/users/', {
+      const response = await fetch(process.env.REACT_APP_API_URL + ApiUrl.USERS, {
         method: 'GET',
         headers: {
           'Authorization': `Token ${token}`

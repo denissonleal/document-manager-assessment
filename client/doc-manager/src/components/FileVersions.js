@@ -1,3 +1,4 @@
+import ApiUrl from '../constants/ApiUrl';
 import React, { useState, useEffect } from "react";
 import CreateFile from './CreateFile'
 import FileUpload from './FileUpload'
@@ -14,7 +15,7 @@ function FileVersions() {
       const token = sessionStorage.getItem('authToken');
 
       const response = await fetch(
-        `http://localhost:8001/api/file_versions?file_name=${filename}`,
+        process.env.REACT_APP_API_URL + ApiUrl.FILE_VERSIONS + `?file_name=${filename}`,
         {
           method: 'GET',
           headers: {
