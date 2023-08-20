@@ -7,7 +7,6 @@ from rest_framework.parsers import MultiPartParser
 from file_versions.models import FileVersion
 from .serializers import FileVersionSerializer
 from rest_framework.generics import RetrieveAPIView
-from django.http import FileResponse
 import mimetypes
 from django.http import HttpResponse
 from django.db.models import OuterRef, Subquery
